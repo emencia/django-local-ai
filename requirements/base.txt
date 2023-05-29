@@ -8,3 +8,4 @@ pytz
 llama-cpp-python==0.1.55
 langchain==0.0.183
 django-instant
+huey

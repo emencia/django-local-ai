@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # project apps
     "apps.account",
+    "apps.llm",
     # project dependencies
     "corsheaders",
     "instant",
@@ -155,5 +156,6 @@ SITE_NAME = "django-local-ai"
 HUEY = SqliteHuey(filename=str(BASE_DIR / "tasks.sqlite"))
 
 MODEL_PATH = str(
-    BASE_DIR.parent.parent.parent / "lm/models/GPT4All-13B-snoozy.ggml.q4_0.bin"
+    BASE_DIR.parent.parent.parent
+    / "lm/models/Wizard-Vicuna-7B-Uncensored.ggmlv2.q5_1.bin"
 )
