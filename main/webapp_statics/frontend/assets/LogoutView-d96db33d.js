@@ -1,0 +1,1 @@
+import{d as o,o as t,v as a,e as n,p as s}from"./index-90d3d32d.js";const i=o({__name:"LogoutView",setup(u){async function e(){await n.get("/api/account/logout"),s.isLoggedIn.value=!1}return t(()=>{e().then(()=>{a.push("/")})}),(r,p)=>null}});export{i as default};
