@@ -1,0 +1,78 @@
+*node_modules/
+*.sqlite3
+.project
+.pydevproject
+.settings
+.idea
+coverage_html_report/
+test_db
+pyvenv.cfg
+.venv
+/email
+/main/webapp_statics/frontend/assets/**
+.pytest_cache
+.pycheck.db
+.ruff_cache
+tasks.sqlite
+tasks.sqlite-shm
+tasks.sqlite-wal
+main/settings/llm.py
+centrifugo/centrifugo
+
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+!docsite/dist
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+bin/
+*.egg-info/
+.installed.cfg
+*.egg
+# Created by pycheck install
+package.json
+yarn.lock
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+

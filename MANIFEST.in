@@ -1,0 +1,5 @@
+recursive-include apps/account *
+recursive-include apps/base *
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

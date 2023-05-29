@@ -1,0 +1,9 @@
+# Specific requirements for development environment, inherit from base
+
+-r ./base.txt
+black
+flake8
+pyright
+django-debug-toolbar
+pytest-django
+ipdb

@@ -1,0 +1,5 @@
+{% autoescape off %}
+Hi,
+Please click on the link to confirm your registration,
+http://{{ domain }}{% url 'activate' token=token %}
+{% endautoescape %}
