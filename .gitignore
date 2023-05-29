@@ -9,7 +9,6 @@ test_db
 pyvenv.cfg
 .venv
 /email
-/main/webapp_statics/frontend/assets/**
 .pytest_cache
 .pycheck.db
 .ruff_cache
