@@ -71,10 +71,12 @@ function loadBashExample() {
 
 Question: "copy the files in the directory named 'target' into a new directory at the same level as target called 'myNewDirectory'"
 
-I need to take the following actions:
+1. I need to take the following actions:
 - List all files in the directory
 - Create a new directory
 - Copy the files from the first directory into the second directory
+
+2. Here is the code:
 \`\`\`bash
 ls
 mkdir myNewDirectory

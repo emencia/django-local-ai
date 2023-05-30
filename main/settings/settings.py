@@ -156,5 +156,5 @@ SITE_NAME = "django-local-ai"
 HUEY = SqliteHuey(filename=str(BASE_DIR / "tasks.sqlite"))
 
 MODEL_PATH = str(
-    BASE_DIR.parent.parent.parent / "lm/models/GPT4All-13B-snoozy.ggml.q4_0.bin"
+    BASE_DIR.parent.parent.parent / "lm/models/GPT4All-13B-snoozy.ggmlv3.q5_0.bin"
 )

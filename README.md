@@ -37,7 +37,7 @@ will use GPT4All-13B-snoozy from [this repository](https://huggingface.co/TheBlo
 
 ```bash
 cd some/dir/where/to/put/your/models
-wget https://huggingface.co/TheBloke/GPT4All-13B-snoozy-GGML/resolve/previous_llama_ggmlv2/GPT4All-13B-snoozy.ggml.q4_0.bin
+wget https://huggingface.co/TheBloke/GPT4All-13B-snoozy-GGML/resolve/main/GPT4All-13B-snoozy.ggmlv3.q5_0.bin
 ```
 
 Change your settings accordingly by updating the `MODEL_PATH` setting in `main/settings.py`. Use an absolute path.
