@@ -11,8 +11,8 @@ Run a local AI from Django with [Llama.cpp](https://github.com/ggerganov/llama.c
 Clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/emencia/django-local-ia
-cd django-local-ia
+git clone https://github.com/emencia/django-local-ai
+cd django-local-ai
 make install
 ```
 
