@@ -11,8 +11,8 @@ Run a local AI from Django with [Llama.cpp](https://github.com/ggerganov/llama.c
 Clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/emencia/django-local-ia
-cd django-local-ia
+git clone https://github.com/emencia/django-local-ai
+cd django-local-ai
 make install
 ```
 
@@ -41,6 +41,26 @@ wget https://huggingface.co/TheBloke/GPT4All-13B-snoozy-GGML/resolve/main/GPT4Al
 ```
 
 Change your settings accordingly by updating the `MODEL_PATH` setting in `main/settings.py`. Use an absolute path.
+
+## Make and check the right settings
+
+First, append this to your Django settings (./main/settings.py):
+
+```python
+CENTRIFUGO_HOST = "http://localhost"
+CENTRIFUGO_PORT = 8427
+CENTRIFUGO_HMAC_KEY = "b4265250-3672-4ed9-abe5-b17ca67d0104"
+CENTRIFUGO_API_KEY = "21dae466-e63e-41d1-8f75-3aa94b41c893"
+SITE_NAME = "django-local-ai"
+```
+
+and don't forget to finish the setup:
+
+```bash
+.venv/bin/python manage.py initws --settings=main.settings.local
+```
+
+Now, you're ready to enjoy your local LLM !
 
 ## Run
 
