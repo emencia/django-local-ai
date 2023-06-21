@@ -1,11 +1,6 @@
-from typing import Tuple
 from django.http import HttpRequest
 from ninja import Router
 
-from apps.base.schemas import (
-    MsgResponseContract,
-    FormInvalidResponseContract,
-)
 from apps.llm.schemas import InferContract, InferResponseContract, InferTemplateContract
 from apps.llm.llama import load_llama_cpp
 from apps.llm.tasks import infer, infertemplate
@@ -17,13 +12,9 @@ router = Router(tags=["llm"])
     "/inferhttp",
     response={
         200: InferResponseContract,
-        422: FormInvalidResponseContract,
-        401: MsgResponseContract,
     },
 )
-def inferhttp(
-    request: HttpRequest, data: InferContract
-) -> Tuple[int, None | FormInvalidResponseContract | MsgResponseContract]:
+def inferhttp(request: HttpRequest, data: InferContract):
     LLM = load_llama_cpp()
     prompt: str = data.dict()["prompt"]
     print("Prompt:")
@@ -44,8 +35,6 @@ def inferhttp(
     "/inferstream",
     response={
         200: None,
-        422: FormInvalidResponseContract,
-        401: MsgResponseContract,
     },
 )
 def inferstream(request: HttpRequest, data: InferContract):
@@ -59,8 +48,6 @@ def inferstream(request: HttpRequest, data: InferContract):
     "/inferlc",
     response={
         200: None,
-        422: FormInvalidResponseContract,
-        401: MsgResponseContract,
     },
 )
 def inferlc(request: HttpRequest, data: InferTemplateContract):

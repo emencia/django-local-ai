@@ -5,6 +5,7 @@
       <div><button class="text-left btn" @click="loadJsonExample()">Json response</button></div>
       <div><button class="text-left btn" @click="loadBashExample()">One shot Bash</button></div>
       <div><button class="text-left btn" @click="loadSumExample()">Summarize text</button></div>
+      <div><button class="text-left btn" @click="loadCodeExample()">Write code</button></div>
     </div>
     <div class="flex justify-center w-full p-3">
       <div class="flex flex-col max-w-[45rem]">
@@ -45,7 +46,7 @@ import { InferResponseContract } from "@/interfaces";
 
 const prompt = ref("");
 const template = ref("");
-const result = ref("");
+//const result = ref("");
 
 async function infer() {
   stream.value = "";
@@ -55,18 +56,18 @@ async function infer() {
     "template": template.value
   });
   console.log(res.data);
-  result.value = res.data.text;
+  stream.value = res.data.text;
 }
 
 function loadJsonExample() {
-  result.value = "";
+  stream.value = "";
   template.value = `### Instruction: {question}
 ### Assistant: (answer in json only)`
   prompt.value = `List all the planets in the solar system with their diameter in kilometers`
 }
 
 function loadBashExample() {
-  result.value = "";
+  stream.value = "";
   template.value = `### Instruction: If someone asks you to perform a task, your job is to come up with a series of bash commands that will perform the task. There is no need to put "#!/bin/bash" in your answer. Make sure to reason step by step, using this format:
 
 Question: "copy the files in the directory named 'target' into a new directory at the same level as target called 'myNewDirectory'"
@@ -90,7 +91,7 @@ Question: {question}
 }
 
 function loadSumExample() {
-  result.value = "";
+  stream.value = "";
   template.value = `Summarize the major key points of this text in a very concise manner, ignore the details:
 
 "{question}"`
@@ -101,5 +102,17 @@ Transformers are highly parallelizable, efficient to train, and produce astoundi
 Transformers are not the end of the road, but the vast majority of recent improvements in natural language processing have involved them. There is still abundant active research on various ways of implementing and applying them, such as Amazon’s AlexaTM 20B which outperforms GPT-3 in a number of tasks and is an order of magnitude smaller in its number of parameters.`
 }
 
-onBeforeMount(() => result.value = "")
+function loadCodeExample() {
+  stream.value = "";
+  template.value = `### User: You are a Python code writer
+
+- Respond with only Python code, no other explanation or text
+- Never include code comments neither usage example
+
+{question}
+### Assistant:`
+  prompt.value = `Count the number of characters a text passed as parameter`
+}
+
+onBeforeMount(() => stream.value = "")
 </script>
