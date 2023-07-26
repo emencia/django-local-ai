@@ -1,5 +1,6 @@
-from typing import Tuple
+from typing import Tuple, cast
 from django.http import HttpRequest
+from llama_cpp import Completion
 from ninja import Router
 
 from apps.base.schemas import (
@@ -23,7 +24,7 @@ router = Router(tags=["llm"])
 )
 def inferhttp(
     request: HttpRequest, data: InferContract
-) -> Tuple[int, None | FormInvalidResponseContract | MsgResponseContract]:
+) -> Tuple[int, None | FormInvalidResponseContract | InferResponseContract]:
     LLM = load_llama_cpp()
     prompt: str = data.dict()["prompt"]
     print("Prompt:")
@@ -31,6 +32,7 @@ def inferhttp(
     output = LLM.create_completion(prompt, max_tokens=1024)
     print("Response:")
     print(output)
+    output = cast(Completion, output)
     text: str = output["choices"][0]["text"]
     resp = InferResponseContract(
         text=text,
