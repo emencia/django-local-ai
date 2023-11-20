@@ -4,14 +4,10 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 
-from .api import api
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", api.urls),
-    path("instant/", include("instant.urls")),
-    path("", include("apps.account.urls")),
+    path("llm/", include("apps.llm.urls")),
     re_path(r"^", TemplateView.as_view(template_name="index.html")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

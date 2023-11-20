@@ -25,27 +25,6 @@
     <template #menu>
       <div class="flex flex-row items-center justify-end w-full h-full space-x-3"
         v-if="!($router.currentRoute.value.path == '/')">
-        <template v-if="user.isLoggedIn.value === true">
-          <!-- div>{{user.name}}</div -->
-          <button class="flex flex-row border-none btn" @click="logout()">
-            <div class="mr-2">
-              <i-humbleicons:logout class="text-2xl"></i-humbleicons:logout>
-            </div>
-            <!-- div>
-              {{ user.name.value }}
-            </div -->
-          </button>
-        </template>
-        <template v-else>
-          <button
-            v-if="!($router.currentRoute.value.path == '/login') && !($router.currentRoute.value.path.startsWith('/account'))"
-            class="flex flex-row border-none btn" @click="$router.push('/login')">
-            <div class="mr-2">
-              <i-entypo:login class="text-2xl"></i-entypo:login>
-            </div>
-            <div>Login</div>
-          </button>
-        </template>
         <div class="pr-5 text-lg cursor-pointer txt-lighter dark:txt-light" @click="user.toggleDarkMode()">
           <i-fa-solid:moon v-if="!user.isDarkMode.value"></i-fa-solid:moon>
           <i-fa-solid:sun v-else></i-fa-solid:sun>
@@ -55,20 +34,6 @@
   </sw-header>
   <sw-mobile-menu class="absolute left-0 z-40 top-16" :is-visible="isMenuVisible" breakpoint="lg">
     <div class="flex flex-col p-3 space-y-3 lighter">
-      <template v-if="user.isLoggedIn.value === true">
-        <div>
-          <button class="border-none btn" @click="logout(); closeMenu()">
-            <i-humbleicons:logout class="text-2xl"></i-humbleicons:logout> Logout
-          </button>
-        </div>
-      </template>
-      <template v-else>
-        <div v-if="!$router.currentRoute.value.path.startsWith('/account')">
-          <button class="border-none btn" @click="$router.push('/login'); closeMenu()">
-            <i-entypo:login class="text-2xl"></i-entypo:login> Login
-          </button>
-        </div>
-      </template>
       <div>
         <button class="border-none btn" @click="user.toggleDarkMode(); closeMenu()">
           <template v-if="!user.isDarkMode.value">
@@ -88,7 +53,6 @@ import { defineComponent, ref, computed } from 'vue';
 import { SwHeader, SwMobileMenu } from "@snowind/header";
 import router from '@/router';
 import { user } from "@/state";
-import { logout } from "@/auth";
 
 export default defineComponent({
   components: {
@@ -109,7 +73,6 @@ export default defineComponent({
       isHome,
       user,
       closeMenu,
-      logout,
     }
   }
 })

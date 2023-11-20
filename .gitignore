@@ -1,5 +1,6 @@
 *node_modules/
 *.sqlite3
+!llmdb.sqlite3
 .project
 .pydevproject
 .settings

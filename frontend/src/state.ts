@@ -3,7 +3,6 @@ import { useScreenSize } from "@snowind/state";
 import { User } from "@snowind/state";
 import { initNotifyService } from "@/notify";
 import { useForms } from "djangoapiforms";
-import { initWs, connectWs } from "@/ws";
 
 const serverUrl = import.meta.env.DEV ? "http://localhost:8000" : "";
 
@@ -19,16 +18,9 @@ const { isMobile, isTablet, isDesktop } = useScreenSize();
 
 async function initState() {
   initNotifyService();
-  await initWs();
-  connectWs()
 }
 
 async function initUserState() {
-  const res = await api.get<{ is_connected: boolean, username: string }>("/api/account/state");
-  if (res.data.is_connected) {
-    user.isLoggedIn.value = true
-  }
-  user.name.value = res.data.username;
   api.setCsrfTokenFromCookie();
   setStateReady(true);
 }

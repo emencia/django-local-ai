@@ -9,3 +9,4 @@ yarn-error.log
 .yarnrc
 /dev
 .vscode
+package-lock.json

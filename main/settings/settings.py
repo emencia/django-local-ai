@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from huey import SqliteHuey
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -37,12 +36,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # project apps
-    "apps.account",
     "apps.llm",
     # project dependencies
     "corsheaders",
-    "instant",
-    "huey.contrib.djhuey",
 ]
 
 MIDDLEWARE = [
@@ -86,8 +82,14 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
+    "llmdb": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "llmdb.sqlite3",
+    },
 }
+
+DATABASE_ROUTERS = ["apps.llm.dbrouter.LlmDbRouter"]
 
 
 # Password validation
@@ -138,6 +140,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SESSION_COOKIE_SAMESITE = "Lax"
 
+# cors conf
 CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
@@ -147,14 +150,8 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 
-CENTRIFUGO_HOST = "http://localhost"
-CENTRIFUGO_PORT = 8427
-CENTRIFUGO_HMAC_KEY = "b4265250-3672-4ed9-abe5-b17ca67d0104"
-CENTRIFUGO_API_KEY = "21dae466-e63e-41d1-8f75-3aa94b41c893"
-SITE_NAME = "django-local-ai"
-
-HUEY = SqliteHuey(filename=str(BASE_DIR / "tasks.sqlite"))
-
-MODEL_PATH = str(
-    BASE_DIR.parent.parent.parent / "lm/models/GPT4All-13B-snoozy.ggmlv3.q5_0.bin"
-)
+# llm conf
+LLM_MODELS_DIR = str(BASE_DIR.parent.parent.parent / "lm/models/")
+LLM_DEFAULT_MODEL = "mistral-7b-instruct-v0.1.Q4_K_M.gguf"
+LLM_DEFAULT_CTX = 8192
+LLM_VERBOSE = True

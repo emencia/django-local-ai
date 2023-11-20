@@ -2,11 +2,8 @@
   <div :class="{ dark: user.isDarkMode.value == true }">
     <div class="flex flex-col h-full min-h-screen lightbg">
       <the-header></the-header>
-      <div class="flex-grow w-full pb-24" v-if="user.isLoggedIn.value == true">
+      <div class="flex-grow w-full pb-24">
         <router-view></router-view>
-      </div>
-      <div class="flex justify-center" v-else>
-        <the-login></the-login>
       </div>
     </div>
     <Toast />
@@ -29,7 +26,6 @@ import Toast from 'primevue/toast';
 import ConfirmDialog from 'primevue/confirmdialog';
 import TheHeader from "@/components/TheHeader.vue";
 import { initState, initUserState, user } from '@/state';
-import TheLogin from './components/TheLogin.vue';
 
 onBeforeMount(() => initState());
 onMounted(() => initUserState());
