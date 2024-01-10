@@ -1,0 +1,47 @@
+{
+    "name": "django-spaninja-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "net": "vite --host --https",
+        "build": "run-s build::prepare build::build build::moveindex build:clean",
+        "preview": "vite preview",
+        "build:prepare": "del ../main/webapp_statics/frontend/assets/* ../main/templates/index.html --force",
+        "build:build": "vite build",
+        "build:moveindex": "move-file ../main/webapp_statics/frontend/index.html ../main/templates/index.html",
+        "build:clean": "del ./dist"
+    },
+    "dependencies": {
+        "@snowind/header": "^0.0.11",
+        "@snowind/state": "^0.1.0",
+        "djangoapiforms": "^0.0.4",
+        "djangoinstant": "^0.5.0",
+        "primeicons": "^6.0.1",
+        "primevue": "^3.27.0",
+        "restmix": "^0.3.1",
+        "vue": "^3.2.47",
+        "vue-router": "4.1.6"
+    },
+    "devDependencies": {
+        "@iconify/json": "^2.2.57",
+        "@snowind/plugin": "0.5.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-vue": "^4.2.1",
+        "@vue/compiler-sfc": "^3.2.47",
+        "autoprefixer": "^10.4.14",
+        "del-cli": "^5.0.0",
+        "move-file-cli": "^3.0.0",
+        "npm-run-all": "^4.1.5",
+        "path": "^0.12.7",
+        "postcss": "^8.4.23",
+        "sass": "^1.62.1",
+        "tailwindcss": "^3.3.2",
+        "tailwindcss-semantic-colors": "^0.2.0",
+        "tslib": "^2.5.0",
+        "typescript": "^4.9.5",
+        "unplugin-icons": "^0.15.3",
+        "unplugin-vue-components": "^0.22.12",
+        "vite": "^4.3.3"
+    }
+}

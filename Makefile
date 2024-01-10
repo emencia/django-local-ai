@@ -13,7 +13,7 @@ DJANGOPROJECT_DIR=main
 DJANGO_SETTINGS=main.settings.local
 STATICFILES_DIR=$(DJANGOPROJECT_DIR)/webapp_statics
 FRONTEND_DIR=frontend
-NPM=yarn# or npm
+NPM=npm
 
 # Formatting variables, FORMATRESET is always to be used last to close formatting
 FORMATBLUE:=$(shell tput setab 4)
