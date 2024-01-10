@@ -44,9 +44,6 @@ bin/
 *.egg-info/
 .installed.cfg
 *.egg
-# Created by pycheck install
-package.json
-yarn.lock
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
