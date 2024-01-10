@@ -48,9 +48,6 @@ help:
 	@echo "  build-front                   -- to build the frontend for production"
 	@echo "  front                         -- to run the frontend in dev mode with watch autoreload"
 	@echo "  netfront                      -- to run the frontend in dev network mode with watch autoreload"
-	@echo "  ws                            -- to run the websockets server"
-	@echo "  installws                     -- to install the websockets server"
-	@echo "  lm                            -- to run the LM tasks queue"
 	@echo
 	@echo "  check                         -- to run the check management command"
 	@echo "  flake                         -- to launch Flake8 checking"
@@ -191,43 +188,21 @@ build-front:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building the frontend <---$(FORMATRESET)\n"
 	@echo ""
-	cd $(FRONTEND_DIR) && $(NPM) build
+	cd $(FRONTEND_DIR) && $(NPM) run build
 .PHONY: build-front
 
 front:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Running the frontend in dev mode <---$(FORMATRESET)\n"
 	@echo ""
-	cd $(FRONTEND_DIR) && $(NPM) dev
+	cd $(FRONTEND_DIR) && $(NPM) run dev
 .PHONY: front
-
-ws:
-	@echo ""
-	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Running the websockets server <---$(FORMATRESET)\n"
-	@echo ""
-	cd centrifugo && ./centrifugo
-.PHONY: ws
-
-installws:
-	@echo ""
-	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install the websockets server <---$(FORMATRESET)\n"
-	@echo ""
-	$(DJANGO_MANAGE) installws --settings=${DJANGO_SETTINGS}
-	$(DJANGO_MANAGE) initws --settings=${DJANGO_SETTINGS}
-.PHONY: installws
-
-lm:
-	@echo ""
-	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Running the LM tasks queue <---$(FORMATRESET)\n"
-	@echo ""
-	$(DJANGO_MANAGE) run_huey --settings=${DJANGO_SETTINGS}
-.PHONY: lm
 
 netfront:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Running the frontend in dev network mode <---$(FORMATRESET)\n"
 	@echo ""
-	cd $(FRONTEND_DIR) && $(NPM) net
+	cd $(FRONTEND_DIR) && $(NPM) run net
 .PHONY: front
 
 test:
