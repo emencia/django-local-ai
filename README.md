@@ -2,10 +2,6 @@
 
 Run a local AI from Django with [Llama.cpp](https://github.com/ggerganov/llama.cpp)
 
-<div align="center">
-<img src="doc/img/screenshot.png" alt="" />
-</div>
-
 ## Install
 
 Clone the repository and install the dependencies:
@@ -24,46 +20,22 @@ export SETUPTOOLS_USE_DISTUTILS=stdlib
 pip install --upgrade --force-reinstall setuptools
 ```
 
-Get the websockets server:
-
-```bash
-make installws
-```
-
-## Make and check the right settings
-
-First, append the output of the `installws` to your Django settings (./main/settings/settings.py): the
-output is of this form:
-
-```python
-CENTRIFUGO_HOST = "http://localhost"
-CENTRIFUGO_PORT = 8427
-CENTRIFUGO_HMAC_KEY = "b4265250-3672-4ed9-abe5-b17ca67d0104"
-CENTRIFUGO_API_KEY = "21dae466-e63e-41d1-8f75-3aa94b41c893"
-SITE_NAME = "django-local-ai"
-```
-
-and don't forget to finish the setup:
-
-```bash
-.venv/bin/python manage.py initws --settings=main.settings.local
-```
-
-Now, get a model and you're ready to enjoy your local LLM !
-
 ## Get a language model
 
-To make this work you need a Llama.cpp ggml compatible language model. For example we
-will use GPT4All-13B-snoozy from [this repository](https://huggingface.co/TheBloke/GPT4All-13B-snoozy-GGML):
+To make this work you need a Llama.cpp gguf quantitized language model. We
+will use Mistral 7B Instruct from [this repository](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF):
 
 ```bash
 cd some/dir/where/to/put/your/models
-wget https://huggingface.co/TheBloke/GPT4All-13B-snoozy-GGML/resolve/main/GPT4All-13B-snoozy.ggmlv3.q5_0.bin
+wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf
 ```
 
-Change your settings accordingly by updating the `MODEL_PATH` setting in `main/settings.py`. Use an absolute path.
+## Settings
 
+Change the `LLM_MODELS_DIR` setting in `main/settings.py` to your model directory path.
 
+Change the `LLM_DEFAULT_MODEL` setting in `main/settings.py` if you
+want to use another model. Use an absolute path.
 
 ## Run
 
@@ -73,22 +45,10 @@ Run the http server:
 make run
 ```
 
-Run the task queue that will handle language model calls:
-
-```bash
-make lm
-```
-
-Run the websockets server:
-
-```bash
-make ws
-```
-
 Create a superuser:
 
 ```bash
 make superuser
 ```
 
-Open the frontend at `localhost:8000` and login
+Open the frontend at `localhost:8000` and the admin at `localhost:8000/admin/`
