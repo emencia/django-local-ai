@@ -2,7 +2,7 @@
   <div :class="{ dark: user.isDarkMode.value == true }">
     <div class="flex flex-col h-full min-h-screen lightbg">
       <the-header></the-header>
-      <div class="flex-grow w-full pb-24">
+      <div class="flex-grow w-full pb-24 mt-16">
         <router-view></router-view>
       </div>
     </div>

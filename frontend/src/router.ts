@@ -6,9 +6,17 @@ const baseTitle = "Django local AI"
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    component: HomeView,
+    //component: HomeView,
+    component: () => import("./views/DemoView.vue"),
     meta: {
-      title: "Home"
+      title: "Email commercial"
+    }
+  },
+  {
+    path: "/demo",
+    component: () => import("./views/DemoView.vue"),
+    meta: {
+      title: "Email commercial"
     }
   },
 ]

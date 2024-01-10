@@ -48,7 +48,9 @@ def generate(
             token = event["choices"][0]["text"]
             if LM.is_verbose is True:
                 print(token, end="", flush=True)
-            yield f"data: {token}\n\n"
+            payload = f"data: {token}\n\n"
+            # print(payload.replace("\n", "\\n"))
+            yield payload
             i += 1
 
     return iter_stream

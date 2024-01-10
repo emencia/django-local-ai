@@ -19,7 +19,7 @@
         "djangoinstant": "^0.5.0",
         "primeicons": "^6.0.1",
         "primevue": "^3.27.0",
-        "restmix": "^0.3.1",
+        "restmix": "^0.4.2",
         "vue": "^3.2.47",
         "vue-router": "4.1.6"
     },
