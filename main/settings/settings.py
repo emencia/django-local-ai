@@ -152,7 +152,9 @@ CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 
 # llm conf
 LLM_MODELS_DIR = str(BASE_DIR.parent.parent.parent / "lm/models/")
-# LLM_DEFAULT_MODEL = "mistral-7b-instruct-v0.1.Q4_K_M.gguf"
-LLM_DEFAULT_MODEL = "vigostral-7b-chat.Q4_K_M.gguf"
+LLM_DEFAULT_MODEL = "mistral-7b-instruct-v0.1.Q4_K_M.gguf"
 LLM_DEFAULT_CTX = 8192
 LLM_VERBOSE = True
+LLM_THREADS: int | None = None
+LLM_GPU_LAYERS: int | None = None
+LLM_EMBEDDING = False
