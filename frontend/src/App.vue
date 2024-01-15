@@ -11,7 +11,7 @@
       <template #message="slotProps">
         <div class="flex flex-row items-center p-4">
           <div>
-            <named-icon :icon="`${slotProps.message.icon}`" class="text-3xl"></named-icon>
+            <div class="text-3xl"></div>
           </div>
           <div class="pl-2">{{ slotProps.message.message }}</div>
         </div>

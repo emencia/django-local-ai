@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # project apps
     "apps.llm",
+    "apps.account",
     # project dependencies
     "corsheaders",
 ]
@@ -158,3 +159,4 @@ LLM_VERBOSE = True
 LLM_THREADS: int | None = None
 LLM_GPU_LAYERS: int | None = None
 LLM_EMBEDDING = False
+LLM_API_KEY = "^v7-t31garja%y#7%ouq-og0f%_a%52@2#l@%ng_6-e+t0al)m"

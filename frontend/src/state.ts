@@ -20,8 +20,23 @@ async function initState() {
   initNotifyService();
 }
 
+function setApiKey(key: string) {
+  console.log("Adding auth key", key);
+  api.addHeader("Authorization", `Bearer ${key}`);
+}
+
+function unsetApiKey() {
+  console.log("Removing auth key");
+  api.removeHeader("Authorization");
+}
+
 async function initUserState() {
-  api.setCsrfTokenFromCookie();
+  const res = await api.get<{ is_connected: boolean, username: string, key: string }>("/api/account/state");
+  if (res.data.is_connected) {
+    user.isLoggedIn.value = true;
+    setApiKey(res.data.key);
+  }
+  user.name.value = res.data.username;
   setStateReady(true);
 }
 
@@ -37,4 +52,6 @@ export {
   isStateReady,
   initUserState,
   initState,
+  setApiKey,
+  unsetApiKey,
 }

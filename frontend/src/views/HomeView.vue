@@ -52,10 +52,14 @@ async function infer() {
   stream.value = "";
   lmState.isRunning = true;
   await api.postSse<Record<string, any>>(
-    "/llm/generate/",
+    "/api/llm/infer",
     { prompt: prompt.value, params: { max_tokens: 1024 } },
     onChunk,
     abortController,
+    false,
+    false,
+    true,
+    false,
   )
   lmState.isStreaming = false;
   lmState.isRunning = false;

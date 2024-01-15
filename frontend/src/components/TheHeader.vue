@@ -23,8 +23,18 @@
       </div>
     </template>
     <template #menu>
-      <div class="flex flex-row items-center justify-end w-full h-full space-x-3"
-        v-if="!($router.currentRoute.value.path == '/')">
+      <div class="flex flex-row items-center justify-end w-full h-full space-x-3">
+        <template v-if="user.isLoggedIn.value === true">
+          <!-- div>{{user.name}}</div -->
+          <button class="flex flex-row border-none btn" @click="logout()">
+            <div class="mr-2">
+              <i-humbleicons:logout class="text-2xl"></i-humbleicons:logout>
+            </div>
+            <div>
+              {{ user.name.value }}
+            </div>
+          </button>
+        </template>
         <div class="pr-5 text-lg cursor-pointer txt-lighter dark:txt-light" @click="user.toggleDarkMode()">
           <i-fa-solid:moon v-if="!user.isDarkMode.value"></i-fa-solid:moon>
           <i-fa-solid:sun v-else></i-fa-solid:sun>
@@ -53,6 +63,7 @@ import { defineComponent, ref, computed } from 'vue';
 import { SwHeader, SwMobileMenu } from "@snowind/header";
 import router from '@/router';
 import { user } from "@/state";
+import { logout } from "@/auth";
 
 export default defineComponent({
   components: {
@@ -72,6 +83,7 @@ export default defineComponent({
       isMenuVisible,
       isHome,
       user,
+      logout,
       closeMenu,
     }
   }

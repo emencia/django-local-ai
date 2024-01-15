@@ -38,11 +38,15 @@ def load_model(model: str | None = None, ctx: int | None = None):
                     settings.LLM_DEFAULT_CTX,
                     "context window",
                 )
-            LM.load_model(settings.LLM_DEFAULT_MODEL, settings.LLM_DEFAULT_CTX)
+            LM.load_model(
+                settings.LLM_DEFAULT_MODEL,
+                settings.LLM_DEFAULT_CTX,
+                settings.LLM_GPU_LAYERS,
+            )
     else:
         if ctx is None:
             raise ValueError("Provide a context window size using the ctx parameter")
-        LM.load_model(model, ctx)
+        LM.load_model(model, ctx, settings.LLM_GPU_LAYERS)
 
 
 def infer(prompt: str, params: InferenceParams = InferenceParams()) -> InferenceResult:
