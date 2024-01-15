@@ -1,5 +1,5 @@
 <template>
-  <sw-header class="z-10 w-full h-16 lg:h-16 primary"
+  <sw-header class="z-10 w-full h-16 lg:h-16 primary fixed"
     :class="$router.currentRoute.value.path == '/' ? 'bg-transparent' : 'primary'"
     @togglemenu="isMenuVisible = !isMenuVisible" breakpoint="lg">
     <template #mobile-back>
@@ -9,7 +9,7 @@
       <div class="inline-flex flex-row items-center h-full pt-1 ml-2 text-2xl truncate" @click="$router.push('/')">
         <div v-if="isHome" class="flex flex-row items-center h-full">
           <i-fluent-emoji-high-contrast:llama class="mx-3 text-3xl"></i-fluent-emoji-high-contrast:llama>
-          <div class="text-2xl txt-lighter">Django Local Language Model</div>
+          <div class="text-2xl txt-lighter">Django Llm</div>
         </div>
         <div v-else v-html="$router.currentRoute.value.meta?.title"></div>
       </div>
@@ -37,7 +37,7 @@
       <div>
         <button class="border-none btn" @click="user.toggleDarkMode(); closeMenu()">
           <template v-if="!user.isDarkMode.value">
-            <i-fa-solid:moon></i-fa-solid:moon> Dark mode
+            <i-fa-solid:moon></i-fa-solid:moon>&nbsp;Dark mode
           </template>
           <template v-else>
             <i-fa-solid:sun></i-fa-solid:sun> Light mode

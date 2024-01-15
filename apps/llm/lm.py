@@ -4,12 +4,26 @@ from locallm import LocalLm, LmParams, InferenceParams
 from locallm.schemas import InferenceResult
 
 
-LM = LocalLm(
-    LmParams(
+params = dict(
+    models_dir=settings.LLM_MODELS_DIR,
+    is_verbose=getattr(settings, "LLM_VERBOSE", False),
+)
+LM = LocalLm(LmParams(**params))
+
+
+def init_lm():
+    global LM
+    params = dict(
         models_dir=settings.LLM_MODELS_DIR,
         is_verbose=getattr(settings, "LLM_VERBOSE", False),
     )
-)
+    if settings.LLM_THREADS:
+        params["threads"] = settings.LLM_THREADS
+    if settings.LLM_GPU_LAYERS:
+        params["gpu_layers"] = settings.LLM_GPU_LAYERS
+    if settings.LLM_EMBEDDING is True:
+        params["embedding"] = True
+    LM = LocalLm(LmParams(**params))
 
 
 def load_model(model: str | None = None, ctx: int | None = None):
@@ -48,7 +62,9 @@ def generate(
             token = event["choices"][0]["text"]
             if LM.is_verbose is True:
                 print(token, end="", flush=True)
-            yield f"data: {token}\n\n"
+            payload = f"data: {token}\n\n"
+            # print(payload.replace("\n", "\\n"))
+            yield payload
             i += 1
 
     return iter_stream

@@ -6,6 +6,8 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from locallm import InferenceParams
 
+from apps.llm.models.task import LmTask
+
 from .lm import infer, generate, load_model, LM
 from .utils import load_models_conf
 
@@ -106,4 +108,27 @@ def models_conf_views(request: HttpRequest) -> JsonResponse:
     if is_model_loaded is True:
         res["ctx"] = res["models"][LM.loaded_model]["ctx"]  # type: ignore
     print(res)
+    return JsonResponse(res)
+
+
+@csrf_exempt
+def execute_task_view(request: HttpRequest) -> JsonResponse | HttpResponseBadRequest:
+    if request.method == "POST":  # type: ignore
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
+        task_name = body["name"]
+        prompt = body["prompt"]
+    else:
+        print(
+            "Provide a prompt and task name: post a payload of this format: "
+            '{"prompt": "...", "name": "..."}'
+        )
+        return HttpResponseBadRequest("Provide a prompt and task name")
+    try:
+        task = LmTask.objects.get(name=task_name)
+    except LmTask.ObjectDoesNotExist:
+        print("Unknown task")
+        return HttpResponseBadRequest("Unknown task")
+    tpl = task.template.replace("{prompt}", prompt)
+    res = infer(tpl, task.params)
     return JsonResponse(res)
